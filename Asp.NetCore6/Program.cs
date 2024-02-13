@@ -48,11 +48,45 @@ namespace Asp.NetCore6
                         await context.Response.WriteAsync($"Following are the list of books authored by {AuthorName}");
                     }
                 });
+
+
+                //regex constraints - only accept certain values.
+                //"/quaterly-reports/{year:int:min(1999):minlength(4)}/{month:regex(^(mar|jun|sep|dec)$)}"
+                endpoint.MapGet("/quaterly-reports/{year:int:min(1999):minlength(4)}/{month}", async (context) =>
+            {
+                int year = Convert.ToInt32(context.Request.RouteValues["year"]);
+                string? month = Convert.ToString(context.Request.RouteValues["month"]); //? means its a nullable type
+                if (month == "mar" || month == "jun" || month == "sep" || month == "dec")
+                {
+                    await context.Response.WriteAsync($"This is the quaterly report for {year}-{month}");
+                }
+                else
+                {
+                    await context.Response.WriteAsync($"The month value {month} is not valid");
+                }
+
+
+            });
+                endpoint.MapGet("/monthly-reports/{month:regex(^([1-9]|1[012])$)}", async (context) =>
+                {
+                    int monthNumber = Convert.ToInt32(context.Request.RouteValues["month"]);
+                    await context.Response.WriteAsync($"This is the monthly report for month number {monthNumber}");
+                
+            });
+                //YYYY-MM-DD OR YYYY.MM.DD OR YYYY/MM/DD - match between 1990-01-01 to 2099-12-31
+                // this means two digits "\\"
+                endpoint.MapGet("/daily-reports/{date:regex(^(19|20)\\d\\d[-/.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$)}", async (context) =>
+                {
+                    string? date = Convert.ToString(context.Request.RouteValues["date"]);
+                    await context.Response.WriteAsync($"This is the monthly report for month number {date}");
+                });
+
+
             });
             //This run when there is no specific route to run.
-                app.Run(async (HttpContext context) =>
+            app.Run(async (HttpContext context) =>
                 {
-                    await context.Response.WriteAsync("Welcome to ASP.NET Core app");
+                    await context.Response.WriteAsync("The URL which you are looking for is not found!");
                 });
 
                 app.Run();            
