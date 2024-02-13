@@ -13,13 +13,15 @@ namespace Asp.NetCore6
 
             app.UseEndpoints(endpoint =>
             {
-                //? means its optional
-                endpoint.MapGet("/products/{id?}", async (context) => // Access /products/101
+                //"id=1" deafault value is 1
+                //"id?" means its optional
+                //"id:int" no space between
+                endpoint.MapGet("/products/{id:int}", async (context) => // Access /products/101
                 {
-                    var id = context.Request.RouteValues["ID"];
+                    var id = context.Request.RouteValues["ID"]; //this return as an object
                     if (id != null)
                     {
-                        id = Convert.ToInt32(id);
+                        id = Convert.ToInt32(id); //this returns int
                         await context.Response.WriteAsync("This is procuct with ID " + id);
                     }
                     else
@@ -29,7 +31,7 @@ namespace Asp.NetCore6
                 });
                 //default bookid is 1. If no value is selected it will run the last route.
                 //default value will be ignored if a value is specified by the user
-                endpoint.MapGet("/books/author/{authorname=john}/{bookid?}", async (context) =>
+                endpoint.MapGet("/books/author/{authorname:alpha}/{bookid?}", async (context) =>
                 {
                     var BookId = context.Request.RouteValues["bookid"];
                     var AuthorName = Convert.ToString(context.Request.RouteValues["authorname"]);
