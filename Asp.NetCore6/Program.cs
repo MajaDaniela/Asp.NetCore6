@@ -1,3 +1,4 @@
+using Asp.NetCore6.CustomConstraints;
 using Microsoft.VisualBasic;
 
 namespace Asp.NetCore6
@@ -7,6 +8,10 @@ namespace Asp.NetCore6
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddRouting(options =>
+            {
+                options.ConstraintMap.Add("alhanumeric", typeof(AlphaNumericConstraint));
+            });
             var app = builder.Build();
 
             app.UseRouting();
@@ -79,6 +84,13 @@ namespace Asp.NetCore6
                 {
                     string? date = Convert.ToString(context.Request.RouteValues["date"]);
                     await context.Response.WriteAsync($"This is the monthly report for month number {date}");
+                });
+
+                //custom Route Constraint
+                endpoint.MapGet("/user/{username:alhanumeric}", async (context) =>
+                {
+                    string? username = Convert.ToString(context.Request.RouteValues["username"]);
+                    await context.Response.WriteAsync($"Welcome {username}");
                 });
 
 
