@@ -29,11 +29,20 @@ namespace Asp.NetCore6
                 });
                 //default bookid is 1. If no value is selected it will run the last route.
                 //default value will be ignored if a value is specified by the user
-                endpoint.MapGet("/books/author/{authorname=John}/{bookid=1}", async (context) =>
+                endpoint.MapGet("/books/author/{authorname=john}/{bookid?}", async (context) =>
                 {
-                    var BookId = Convert.ToInt32(context.Request.RouteValues["bookid"]);
-                    var AuthorName = Convert.ToInt32(context.Request.RouteValues["authorname"]);
-                    await context.Response.WriteAsync($"This is the book authored by {AuthorName} and ");
+                    var BookId = context.Request.RouteValues["bookid"];
+                    var AuthorName = Convert.ToString(context.Request.RouteValues["authorname"]);
+
+
+                    if (BookId != null)
+                    {
+                        await context.Response.WriteAsync($"This is the book authored by {AuthorName} and book ID is {BookId}");
+                    }
+                    else 
+                    {
+                        await context.Response.WriteAsync($"Following are the list of books authored by {AuthorName}");
+                    }
                 });
             });
             //This run when there is no specific route to run.
