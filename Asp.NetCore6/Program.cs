@@ -16,7 +16,9 @@ namespace Asp.NetCore6
                 //"id=1" deafault value is 1
                 //"id?" means its optional
                 //"id:int" no space between
-                endpoint.MapGet("/products/{id:int}", async (context) => // Access /products/101
+                //int:min(10):max(1000)
+                //int:range(10,1000) between 10 and 1000
+                endpoint.MapGet("/products/{id:int:range(10,1000)}", async (context) => // Access /products/101
                 {
                     var id = context.Request.RouteValues["ID"]; //this return as an object
                     if (id != null)
@@ -31,11 +33,11 @@ namespace Asp.NetCore6
                 });
                 //default bookid is 1. If no value is selected it will run the last route.
                 //default value will be ignored if a value is specified by the user
-                endpoint.MapGet("/books/author/{authorname:alpha}/{bookid?}", async (context) =>
+                // alha = text value
+                endpoint.MapGet("/books/author/{authorname:alpha:length(4, 8)}/{bookid?}", async (context) =>
                 {
                     var BookId = context.Request.RouteValues["bookid"];
                     var AuthorName = Convert.ToString(context.Request.RouteValues["authorname"]);
-
 
                     if (BookId != null)
                     {
