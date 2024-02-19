@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.NetCore6", "Asp.NetCore6\Asp.NetCore6.csproj", "{97A74593-FE75-4C27-8A4C-010656B91D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServeStaticFiles", "ServeStaticFiles\ServeStaticFiles.csproj", "{0AFF0CB3-59E4-4245-87DA-E02B39A297D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServeStaticFiles", "ServeStaticFiles\ServeStaticFiles.csproj", "{0AFF0CB3-59E4-4245-87DA-E02B39A297D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovie", "MvcMovie\MvcMovie.csproj", "{2A142F74-3A67-441D-A4EB-9DEFC4823639}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0AFF0CB3-59E4-4245-87DA-E02B39A297D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AFF0CB3-59E4-4245-87DA-E02B39A297D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AFF0CB3-59E4-4245-87DA-E02B39A297D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A142F74-3A67-441D-A4EB-9DEFC4823639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A142F74-3A67-441D-A4EB-9DEFC4823639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A142F74-3A67-441D-A4EB-9DEFC4823639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A142F74-3A67-441D-A4EB-9DEFC4823639}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
